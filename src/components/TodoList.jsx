@@ -1,12 +1,10 @@
 import React from "react";
 import TodoCard from "./TodoCard";
 
-const TodoList = () => {
-  const toDo = ["Mop the floor", "Buy groceries", "Prepare for exams"];
-
+const TodoList = ({ toDos }) => {
   return (
     <ul className="main">
-      {toDo.map((toDo, index) => (
+      {toDos.map((toDo, index) => (
         <TodoCard key={index}>
           <p>{toDo}</p>
         </TodoCard>
