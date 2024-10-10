@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import TodoCard from "./TodoCard";
 
 const TodoList = () => {
-  return (
-    <div>TodoList</div>
-  )
-}
+  const toDo = ["Mop the floor", "Buy groceries", "Prepare for exams"];
 
-export default TodoList
+  return (
+    <ul className="main">
+      {toDo.map((toDo, index) => (
+        <TodoCard key={index}>
+          <p>{toDo}</p>
+        </TodoCard>
+      ))}
+    </ul>
+  );
+};
+
+export default TodoList;
