@@ -1,4 +1,12 @@
-const TodoCard = ({ children, index, onRemoveToDo }) => {
+import React from "react";
+
+interface ToDoCardProps {
+  index: number;
+  onRemoveToDo: (id: number) => void;
+  children: React.ReactNode;
+}
+
+const TodoCard: React.FC<ToDoCardProps> = ({ children, index, onRemoveToDo }) => {
   return (
     <li className="todoItem">
       {children}
