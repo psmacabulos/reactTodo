@@ -1,11 +1,10 @@
-import React from "react";
 import TodoCard from "./TodoCard";
 
-const TodoList = ({ toDos }) => {
+const TodoList = ({ toDos, onRemoveToDo }) => {
   return (
     <ul className="main">
       {toDos.map((toDo, index) => (
-        <TodoCard key={index}>
+        <TodoCard key={index} index={index} onRemoveToDo={onRemoveToDo}>
           <p>{toDo}</p>
         </TodoCard>
       ))}
