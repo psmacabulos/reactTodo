@@ -91,6 +91,9 @@ p {
   gap: 14px;
 }
 
+.editMode {
+  background-color: rgb(155, 165, 227);
+}
 .actionsContainer button {
   transition-duration: 200ms;
   border: none;

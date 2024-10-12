@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { ToDo } from "../App";
 import { v4 as uuidv4 } from "uuid";
 
-interface TodoInputProps {
-  onAddToDo: (todo: ToDo) => void;
-}
+import { ToDoInputProps } from "../App";
 
-const TodoInput: React.FC<TodoInputProps> = ({ onAddToDo }) => {
+const TodoInput: React.FC<ToDoInputProps> = ({ onAddToDo, currentToDo }) => {
   const [toDoItem, setToDoItem] = useState<ToDo>({ id: "", text: "" });
+
+  useEffect(() => {
+    if (currentToDo) setToDoItem(currentToDo);
+  }, [currentToDo]);
+
   const handleClick = () => {
     const newTodo = { ...toDoItem, id: uuidv4() };
     onAddToDo(newTodo);
@@ -21,7 +24,7 @@ const TodoInput: React.FC<TodoInputProps> = ({ onAddToDo }) => {
         value={toDoItem.text}
         onChange={(e) => setToDoItem({ ...toDoItem, text: e.target.value })}
       ></input>
-      <button onClick={handleClick}>Add to do</button>
+      <button onClick={handleClick}>{currentToDo ? "Finish editing" : "Add to do"}</button>
     </header>
   );
 };
