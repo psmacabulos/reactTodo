@@ -19,12 +19,15 @@ const TodoInput: React.FC<ToDoInputProps> = ({ onAddToDo, currentToDo }) => {
   };
   return (
     <header>
-      <input
-        placeholder="What is your task today?"
-        value={toDoItem.text}
-        onChange={(e) => setToDoItem({ ...toDoItem, text: e.target.value })}
-      ></input>
-      <button onClick={handleClick}>{currentToDo ? "Finish editing" : "Add to do"}</button>
+      <h1>My React To Do App</h1>
+      <div className="inputArea">
+        <input
+          placeholder="What is your task?"
+          value={toDoItem.text}
+          onChange={(e) => setToDoItem({ ...toDoItem, text: e.target.value })}
+        ></input>
+        <button onClick={handleClick}>{currentToDo ? "Edit" : "Add"}</button>
+      </div>
     </header>
   );
 };

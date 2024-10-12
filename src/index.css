@@ -1,117 +1,146 @@
-* {
-  font-family: "Inter", sans-serif;
+/* Existing styles */
+:root {
+  --primary-color: #4caf50; /* Green */
+  --secondary-color: #ffffff; /* White */
+  --accent-color: #ff5722; /* Orange */
+  --font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  color: #202124;
-}
-
-h1,
-h2,
-h3,
-input,
-button {
-  font-family: "Press Start 2P", system-ui;
-}
-
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 14px;
-  background: #eff6ff;
-  gap: 14px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  background-image: linear-gradient(135deg, #f5f7fa 25%, transparent 25%),
+    linear-gradient(225deg, #f5f7fa 25%, transparent 25%),
+    linear-gradient(45deg, #f5f7fa 25%, transparent 25%),
+    linear-gradient(315deg, #f5f7fa 25%, #ffffff 25%);
+  background-position: 10px 0, 10px 0, 0 0, 0 0;
+  background-size: 20px 20px;
+  background-repeat: repeat;
 }
 
 header {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.inputArea {
   display: flex;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
-header,
-.main {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-  gap: 14px;
+.inputArea input {
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 60%;
+  max-width: 300px;
 }
 
-header input {
-  flex: 1;
-  border-radius: 14px;
-  outline: none;
-  width: 100%;
+.inputArea input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
-header button {
-  border-radius: 14px;
-  background: transparent;
-  transition-duration: 200ms;
-  cursor: pointer;
-}
-
-header button:hover {
-  opacity: 0.7;
-}
-
-header button,
-header input {
-  padding: 14px 18px;
+.inputArea button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
   border: none;
-  outline: none;
-  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-p {
-  font-size: 0.9em;
+.inputArea button:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color); /* Ensure text color is visible */
 }
 
+@media (max-width: 600px) {
+  .inputArea {
+    flex-direction: column;
+  }
+
+  .inputArea input {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  .inputArea button {
+    width: 80%;
+  }
+}
+
+/* New styles for TodoList and TodoCard */
 .main {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 600px;
 }
 
 .todoItem {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 14px;
-  padding: 14px;
-  border-radius: 14px;
-  background: white;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  transition: background-color 0.3s ease;
+  color: #000; /* Black text for better readability */
+}
+
+.todoItem.editMode {
+  background-color: rgba(76, 175, 80, 0.1); /* Light green background for edit mode */
 }
 
 .todoItem p {
-  flex: 1;
+  margin: 0;
+  flex-grow: 1;
+  padding: 0 10px;
 }
 
 .actionsContainer {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
-.editMode {
-  background-color: rgb(155, 165, 227);
-}
 .actionsContainer button {
-  transition-duration: 200ms;
+  background: none;
   border: none;
-  background: transparent;
   cursor: pointer;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
 }
 
 .actionsContainer button:hover {
-  opacity: 0.7;
+  color: var(--accent-color);
 }
 
-@media (min-width: 640px) {
-  header button,
-  header input {
-    font-size: 1.2em;
+@media (max-width: 600px) {
+  .todoItem {
+    flex-direction: row; /* Ensure buttons stay on the right */
+    justify-content: space-between;
   }
 
-  p {
-    font-size: 1em;
+  .actionsContainer {
+    flex-direction: row; /* Ensure buttons stay aligned */
+    justify-content: flex-end;
   }
 }
