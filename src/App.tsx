@@ -25,11 +25,11 @@ function App() {
 
   // Load todos from local storage when the app initializes
   useEffect(() => {
-    if (localStorage) {
-      const storedToDos = localStorage.getItem("toDos");
-      if (storedToDos) {
-        setToDos(JSON.parse(storedToDos));
-      }
+    const storedToDos = localStorage.getItem("toDos");
+    if (storedToDos) {
+      setToDos(JSON.parse(storedToDos));
+    } else {
+      console.log("there is no local storage");
     }
   }, []);
 
