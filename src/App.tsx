@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
-import { todo } from "node:test";
 
 export interface ToDo {
   id: string;
@@ -21,24 +20,35 @@ export interface ToDoListProps {
 }
 
 function App() {
-  //Define the state variables
   const [toDos, setToDos] = useState<ToDo[]>([]);
   const [currentToDo, setCurrentToDo] = useState<ToDo | null>(null);
 
+  // Load todos from local storage when the app initializes
+  useEffect(() => {
+    if (localStorage) {
+      const storedToDos = localStorage.getItem("toDos");
+      if (storedToDos) {
+        setToDos(JSON.parse(storedToDos));
+      }
+    }
+  }, []);
+
   const handleAddToDo = (newToDo: ToDo) => {
+    let updatedTodo;
     if (currentToDo) {
-      setToDos(toDos.map((todo) => (todo.id === currentToDo.id ? newToDo : todo)));
+      updatedTodo = toDos.map((todo) => (todo.id === currentToDo.id ? newToDo : todo));
       setCurrentToDo(null);
     } else {
-      setToDos([...toDos, newToDo]);
+      updatedTodo = [...toDos, newToDo];
     }
+    setToDos(updatedTodo);
+    localStorage.setItem("toDos", JSON.stringify(updatedTodo));
   };
 
   const handleEditToDo = (todo: ToDo) => {
     setCurrentToDo(todo);
   };
 
-  // create a function to delete the  toDoItem
   const handleRemoveToDo = (id: number) => {
     const newToDos = toDos.filter((todo, index) => id !== index);
     setToDos(newToDos);
